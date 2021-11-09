@@ -2,6 +2,10 @@
 
 This repository is for the York University Google Student Developers Club Create Series Workshop
 
+Youtube Link to Workshop --> https://gdsc.community.dev/j/g3hrhb462zjaa/
+
+RSVP Link --> https://gdsc.community.dev/e/mbtxna/
+
 ## Prerequisites
 
 - Install Go
