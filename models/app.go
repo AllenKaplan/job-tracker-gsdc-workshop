@@ -1,13 +1,9 @@
 package models
 
 type App struct {
-	Id       int
-	Company  string
-	Position string
-	Link     string
-	Status   string
-}
-
-type GetAppsResponse struct {
-	Apps []App
+	Id       int    `json:"id,omitempty"`
+	Company  string `json:"company,omitempty"`
+	Position string `json:"position,omitempty"`
+	Link     string `json:"link,omitempty"`
+	Status   string `json:"status,omitempty"`
 }

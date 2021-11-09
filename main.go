@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -36,7 +37,7 @@ func main() {
 		User:     os.Getenv("USER"),
 		Password: os.Getenv("PASSWORD"),
 		DBName:   os.Getenv("DB_NAME"),
-		Port:     os.Getenv("PORT"),
+		Port:     os.Getenv("DB_PORT"),
 	}
 	s, err := NewServer(config)
 	if err != nil {
@@ -52,7 +53,13 @@ func main() {
 	r.POST("/app", s.postAppHandler)
 	r.PUT("/app", s.putAppHandler)
 	r.DELETE("/app", s.deleteAppHandler)
-	r.Run()
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	r.Run(fmt.Sprintf(":%s", port))
 }
 
 func pingHandler(c *gin.Context) {
