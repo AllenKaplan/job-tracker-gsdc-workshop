@@ -8,12 +8,13 @@ COPY go.* ./
 RUN go mod download
 COPY db ./db/
 COPY models ./models/
+COPY templates ./templates/
 COPY *.go ./
-
+COPY .env ./
 
 FROM base AS build
 ENV GOOS=linux
-RUN --mount=type=cache,target=/root/.cache/go-build go build -o app ./cmd
+RUN --mount=type=cache,target=/root/.cache/go-build go build -o app .
 
 FROM alpine:latest  AS bin
 RUN apk --no-cache add ca-certificates

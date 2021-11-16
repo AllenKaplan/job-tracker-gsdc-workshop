@@ -23,9 +23,10 @@ type Config struct {
 	Port     string
 }
 
-func NewDB(config Config) (Repository, error) {
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", config.Host, config.User, config.Password, config.DBName, config.Port)
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+func NewDB(dbCfg Config) (Repository, error) {
+	dbURI := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
+		dbCfg.Host, dbCfg.User, dbCfg.Password, dbCfg.DBName, dbCfg.Port)
+	db, err := gorm.Open(postgres.Open(dbURI), &gorm.Config{})
 	if err != nil {
 		return nil, err
 	}

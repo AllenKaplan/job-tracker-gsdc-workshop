@@ -1,13 +1,17 @@
 go-build:
-	go build -o app ./cmd
+	go build -o app .
 
 run: build
 	./app
 
 build:
 	DOCKER_BUILDKIT=1 docker build -t job-tracker .
-	
-up:
+
+
+up: build
+	docker-compose up -d #> /dev/null
+
+container:
 	docker run  --rm -d -p 8080:8080 -e PORT='8080' \
 		--name job-tracker job-tracker
 

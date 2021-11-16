@@ -33,11 +33,11 @@ func main() {
 	}
 
 	config := db.Config{
-		Host:     os.Getenv("HOST"),
-		User:     os.Getenv("USER"),
-		Password: os.Getenv("PASSWORD"),
-		DBName:   os.Getenv("DB_NAME"),
-		Port:     os.Getenv("DB_PORT"),
+		Host:     os.Getenv("POSTGRES_HOST"),
+		User:     os.Getenv("POSTGRES_USER"),
+		Password: os.Getenv("POSTGRES_PASSWORD"),
+		DBName:   os.Getenv("POSTGRES_NAME"),
+		Port:     os.Getenv("POSTGRES_PORT"),
 	}
 	s, err := NewServer(config)
 	if err != nil {
@@ -45,6 +45,8 @@ func main() {
 	}
 
 	r := gin.Default()
+
+	r.Delims("{[{", "}]}")
 	r.LoadHTMLGlob("templates/*")
 	r.GET("/ping", pingHandler)
 	r.GET("/", indexHandler)
